@@ -74,8 +74,8 @@ function init() {
 
   //
 
-  const listener = new THREE.AudioListener();
-  camera.add(listener);
+  //const listener = new THREE.AudioListener();
+  //camera.add(listener);
 
   //
 
