@@ -10,8 +10,8 @@ export class Sculpture {
     for (let k = 0; k < dimensions[2]; k++) {
       for (let j = 0; j < dimensions[1]; j++) {
         for (let i = 0; i < dimensions[0]; i++) {
-          // Calculate element's position
-          const position = new THREE.Vector3(
+          // Calculate element's coordinate
+          const coordinate = new THREE.Vector3(
             i - dimensions[0] * 0.5 + 0.5,
             dimensions[1] - j,
             k - dimensions[2] * 0.5 + 0.5
@@ -36,7 +36,7 @@ export class Sculpture {
               geometry.rotateY(Math.random() * Math.PI * 2);
               geometry.scale(0.0625, 0.0625, 0.0625);
               mesh = new THREE.Mesh(geometry, material);
-              mesh.position.set(position.x, position.y, position.z);
+              mesh.position.set(coordinate.x, coordinate.y, coordinate.z);
               this.components.add(mesh);
               break;
             case 1:
@@ -52,7 +52,7 @@ export class Sculpture {
               geometry.rotateY(Math.random() * Math.PI * 2);
               geometry.scale(0.125, 0.125, 0.125);
               mesh = new THREE.Mesh(geometry, material);
-              mesh.position.set(position.x, position.y, position.z);
+              mesh.position.set(coordinate.x, coordinate.y, coordinate.z);
               this.components.add(mesh);
               break;
             case 2:
@@ -67,7 +67,7 @@ export class Sculpture {
                 mesh.scale.set(mesh.uScale, mesh.uScale, mesh.uScale);
                 ringGroup.add(mesh);
               }
-              ringGroup.position.set(position.x, position.y, position.z);
+              ringGroup.position.set(coordinate.x, coordinate.y, coordinate.z);
               ringGroup.scale.set(baseScale, baseScale, baseScale);
               ringGroup.rotateX(Math.random() * Math.PI * 2);
               ringGroup.rotateY(Math.random() * Math.PI * 2);
@@ -78,6 +78,16 @@ export class Sculpture {
         }
       }
     }
+
+    const soundComponent = new THREE.Mesh(
+      new THREE.BoxGeometry(0.1, 0.1, 0.1),
+      new THREE.MeshBasicMaterial({ visible: false })
+    );
+    soundComponent.add(sound);
+    soundComponent.type = "Sound";
+
+    this.components.add(soundComponent);
+
     this.components.position.copy(position);
     this.components.scale.copy(scale);
     this.components.quaternion.copy(quaternion);
@@ -86,6 +96,13 @@ export class Sculpture {
   }
 
   addToScene(scene) {
+    this.components.children.forEach((component) => {
+      if (component.type === "Sound") {
+        component.children[0].setRefDistance(0.01);
+        component.children[0].setLoop(true);
+        component.children[0].play();
+      }
+    });
     scene.add(this.components);
   }
   update() {

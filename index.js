@@ -88,8 +88,11 @@ function init() {
         "sounds/sound-" + soundIndex + ".ogg",
         function (buffer) {
           sound.setBuffer(buffer);
-          sound.setRefDistance(0.1);
+          //sound.setRefDistance(0.01);
+          /*
           sound.play();
+          sound.setLoop(true);
+          */
         }
       );
       sculptures.push(
@@ -173,7 +176,7 @@ function render(timestamp, frame) {
 
   renderer.render(scene, camera);
 
-  sculpture.forEach((s) => {
+  sculptures.forEach((s) => {
     s.update();
   });
 }
