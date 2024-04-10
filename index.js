@@ -65,7 +65,7 @@ function init() {
 
       const sound = new THREE.PositionalAudio(listener);
       const audioLoader = new THREE.AudioLoader();
-      audioLoader.load("./sounds/sound-8.ogg", function (buffer) {
+      audioLoader.load("./sounds/sound-1.ogg", function (buffer) {
         sound.setBuffer(buffer);
         sound.setRefDistance(1);
         sound.setLoop(true);
