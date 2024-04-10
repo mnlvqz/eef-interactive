@@ -5,6 +5,7 @@ import { PositionalAudio } from "three";
 export class Sculpture {
   constructor(dimensions, position, scale, quaternion, sound) {
     this.dimensions = dimensions;
+    this.sound = sound;
     this.components = new THREE.Group();
 
     for (let k = 0; k < dimensions[2]; k++) {
@@ -96,6 +97,7 @@ export class Sculpture {
   }
 
   addToScene(scene) {
+    /*
     this.components.children.forEach((component) => {
       if (component.type === "Sound") {
         component.children[0].setRefDistance(0.01);
@@ -103,6 +105,7 @@ export class Sculpture {
         component.children[0].play();
       }
     });
+    */
     scene.add(this.components);
   }
   update() {

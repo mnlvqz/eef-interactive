@@ -88,11 +88,9 @@ function init() {
         "sounds/sound-" + soundIndex + ".ogg",
         function (buffer) {
           sound.setBuffer(buffer);
-          //sound.setRefDistance(0.01);
-          /*
+          sound.setRefDistance(0.01);
           sound.play();
           sound.setLoop(true);
-          */
         }
       );
       sculptures.push(
