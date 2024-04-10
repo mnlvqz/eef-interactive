@@ -79,6 +79,7 @@ export class Sculpture {
         }
       }
     }
+    /*
 
     const soundComponent = new THREE.Mesh(
       new THREE.BoxGeometry(0.1, 0.1, 0.1),
@@ -88,6 +89,7 @@ export class Sculpture {
     soundComponent.type = "Sound";
 
     this.components.add(soundComponent);
+    */
 
     this.components.position.copy(position);
     this.components.scale.copy(scale);

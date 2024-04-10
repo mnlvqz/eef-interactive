@@ -81,6 +81,7 @@ function init() {
 
   function onSelect() {
     if (reticle.visible) {
+      /*
       const sound = new THREE.PositionalAudio(listener);
       const audioLoader = new THREE.AudioLoader();
       const soundIndex = Math.floor(Math.random() * 22 + 1);
@@ -93,13 +94,14 @@ function init() {
           sound.setLoop(true);
         }
       );
+      */
       sculptures.push(
         new Sculpture(
           [3, 15, 3],
           new THREE.Vector3().setFromMatrixPosition(reticle.matrix),
           new THREE.Vector3(0.1, 0.1, 0.1),
           new THREE.Quaternion().setFromRotationMatrix(reticle.matrix),
-          sound
+          1
         )
       );
       sculptures[sculptures.length - 1].addToScene(scene);
