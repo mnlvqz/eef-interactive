@@ -58,26 +58,25 @@ function init() {
 
   function onSelect() {
     if (reticle.visible) {
-      /*
-      const sound =
-        playlist.children[Math.floor(Math.random() * playlist.children.length)];
-        */
-
       const sound = new THREE.PositionalAudio(listener);
+      const soundIndex = Math.floor(Math.random() * 22 + 1);
       const audioLoader = new THREE.AudioLoader();
-      audioLoader.load("./sounds/sound-1.ogg", function (buffer) {
-        sound.setBuffer(buffer);
-        sound.setRefDistance(1);
-        sound.setLoop(true);
-        sound.play();
-      });
+      audioLoader.load(
+        "./sounds/sound-" + soundIndex + ".ogg",
+        function (buffer) {
+          sound.setBuffer(buffer);
+          sound.setRefDistance(0.1);
+          sound.setLoop(true);
+          sound.play();
+        }
+      );
       sculptures.push(
         new Sculpture(
           [3, 15, 3],
           new THREE.Vector3().setFromMatrixPosition(reticle.matrix),
           new THREE.Vector3(0.1, 0.1, 0.1),
           new THREE.Quaternion().setFromRotationMatrix(reticle.matrix),
-          1
+          sound
         )
       );
       sculptures[sculptures.length - 1].addToScene(scene);
