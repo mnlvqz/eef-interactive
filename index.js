@@ -54,6 +54,12 @@ function init() {
 
   //
 
+  const playlist = document.getElementById("playlist");
+  const sound =
+    playlist.children[Math.floor(Math.random() * playlist.children.length)];
+  //sound.play();
+  console.log(sound);
+
   function onSelect() {
     if (reticle.visible) {
       /*
