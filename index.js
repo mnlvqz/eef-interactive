@@ -180,5 +180,3 @@ function render(timestamp, frame) {
     s.update();
   });
 }
-
-function loadSounds(listener) {}
