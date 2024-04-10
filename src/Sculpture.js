@@ -3,11 +3,8 @@ import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js"
 import { PositionalAudio } from "three";
 
 export class Sculpture {
-  constructor(dimensions, position, scale, quaternion) {
+  constructor(dimensions, position, scale, quaternion, sound) {
     this.dimensions = dimensions;
-    this.position = position;
-    this.scale = scale;
-    this.quaternion = quaternion;
     this.components = new THREE.Group();
 
     for (let k = 0; k < dimensions[2]; k++) {
