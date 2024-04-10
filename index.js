@@ -11,7 +11,32 @@ let reticle;
 let hitTestSource = null;
 let hitTestSourceRequested = false;
 
-let sculpture = [];
+const soundURLs = [
+  "sound-1.ogg",
+  "sound-2.ogg",
+  "sound-3.ogg",
+  "sound-4.ogg",
+  "sound-5.ogg",
+  "sound-6.ogg",
+  "sound-7.ogg",
+  "sound-8.ogg",
+  "sound-9.ogg",
+  "sound-10.ogg",
+  "sound-11.ogg",
+  "sound-12.ogg",
+  "sound-13.ogg",
+  "sound-14.ogg",
+  "sound-15.ogg",
+  "sound-16.ogg",
+  "sound-17.ogg",
+  "sound-18.ogg",
+  "sound-19.ogg",
+  "sound-20.ogg",
+  "sound-21.ogg",
+  "sound-22.ogg",
+];
+
+let sculptures = [];
 
 init();
 animate();
@@ -49,17 +74,34 @@ function init() {
 
   //
 
+  const listener = new THREE.AudioListener();
+  camera.add(listener);
+
+  //
+
   function onSelect() {
     if (reticle.visible) {
-      sculpture.push(
+      const sound = new THREE.PositionalAudio(listener);
+      const audioLoader = new THREE.AudioLoader();
+      const soundIndex = Math.floor(Math.random() * 22 + 1);
+      audioLoader.load(
+        "sounds/sound-" + soundIndex + ".ogg",
+        function (buffer) {
+          sound.setBuffer(buffer);
+          sound.setRefDistance(0.1);
+          sound.play();
+        }
+      );
+      sculptures.push(
         new Sculpture(
           [3, 15, 3],
           new THREE.Vector3().setFromMatrixPosition(reticle.matrix),
           new THREE.Vector3(0.1, 0.1, 0.1),
-          new THREE.Quaternion().setFromRotationMatrix(reticle.matrix)
+          new THREE.Quaternion().setFromRotationMatrix(reticle.matrix),
+          sound
         )
       );
-      sculpture[sculpture.length - 1].addToScene(scene);
+      sculptures[sculptures.length - 1].addToScene(scene);
     }
   }
 
@@ -135,3 +177,5 @@ function render(timestamp, frame) {
     s.update();
   });
 }
+
+function loadSounds(listener) {}
