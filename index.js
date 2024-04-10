@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { ARButton } from "three/addons/webxr/ARButton.js";
+import { PositionalAudio } from "three";
 import { Sculpture } from "sculpture";
 
 let container;
@@ -49,33 +50,27 @@ function init() {
 
   //
 
+  const playlist = document.getElementById("playlist");
   const listener = new THREE.AudioListener();
   camera.add(listener);
 
   //
 
-  const playlist = document.getElementById("playlist");
-  const sound =
-    playlist.children[Math.floor(Math.random() * playlist.children.length)];
-  //sound.play();
-  console.log(sound);
-
   function onSelect() {
     if (reticle.visible) {
       /*
+      const sound =
+        playlist.children[Math.floor(Math.random() * playlist.children.length)];
+        */
+
       const sound = new THREE.PositionalAudio(listener);
       const audioLoader = new THREE.AudioLoader();
-      const soundIndex = Math.floor(Math.random() * 22 + 1);
-      audioLoader.load(
-        "sounds/sound-" + soundIndex + ".ogg",
-        function (buffer) {
-          sound.setBuffer(buffer);
-          sound.setRefDistance(0.01);
-          sound.play();
-          sound.setLoop(true);
-        }
-      );
-      */
+      audioLoader.load("./sounds/sound-8.ogg", function (buffer) {
+        sound.setBuffer(buffer);
+        sound.setRefDistance(1);
+        sound.setLoop(true);
+        sound.play();
+      });
       sculptures.push(
         new Sculpture(
           [3, 15, 3],
@@ -86,6 +81,7 @@ function init() {
         )
       );
       sculptures[sculptures.length - 1].addToScene(scene);
+      console.log(sculptures);
     }
   }
 
